@@ -1,0 +1,5 @@
+.vscode
+libft/*
+server
+client
+test*
