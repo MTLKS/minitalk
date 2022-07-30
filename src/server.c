@@ -6,7 +6,7 @@
 /*   By: maliew <maliew@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 20:47:06 by maliew            #+#    #+#             */
-/*   Updated: 2022/07/29 02:04:38 by maliew           ###   ########.fr       */
+/*   Updated: 2022/07/30 15:49:31 by maliew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	sig_action(int signum, siginfo_t *info, void *context)
 	static char		c = 0;
 
 	(void)(context);
-	if (c_pid != info->si_pid)
+	if (c_pid != info->si_pid && info->si_pid != 0)
 		c_pid = info->si_pid;
 	else
 	{
