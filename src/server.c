@@ -6,7 +6,7 @@
 /*   By: maliew <maliew@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 20:47:06 by maliew            #+#    #+#             */
-/*   Updated: 2022/07/30 22:20:25 by maliew           ###   ########.fr       */
+/*   Updated: 2022/07/31 15:52:16 by maliew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,4 @@ int	main(void)
 	sigaction(SIGUSR2, &sa, NULL);
 	while (1)
 		pause();
-	return (0);
 }
