@@ -6,7 +6,7 @@
 /*   By: maliew <maliew@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 21:09:57 by maliew            #+#    #+#             */
-/*   Updated: 2022/07/30 15:58:28 by maliew           ###   ########.fr       */
+/*   Updated: 2022/07/30 22:19:20 by maliew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ static void	sig_action(int signum, siginfo_t *info, void *context)
 {
 	static int		byte_count = 0;
 	static int		bit_count = 8;
-	static pid_t	c_pid;
+	static pid_t	server_pid;
 	char			c;
 
 	(void)(context);
 	if (info->si_pid != 0)
-		c_pid = info->si_pid;
+		server_pid = info->si_pid;
 	if (signum == SIGUSR2)
 		mt_exit("Message sent successfully.\n");
 	else
@@ -43,9 +43,9 @@ static void	sig_action(int signum, siginfo_t *info, void *context)
 		}
 		c = g_msg[byte_count];
 		if (c && ((c >> bit_count) & 1))
-			kill(c_pid, SIGUSR2);
+			kill(server_pid, SIGUSR2);
 		else
-			kill(c_pid, SIGUSR1);
+			kill(server_pid, SIGUSR1);
 	}
 }
 

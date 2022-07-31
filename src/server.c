@@ -6,7 +6,7 @@
 /*   By: maliew <maliew@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 20:47:06 by maliew            #+#    #+#             */
-/*   Updated: 2022/07/30 15:49:31 by maliew           ###   ########.fr       */
+/*   Updated: 2022/07/30 22:20:25 by maliew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static void	sig_action(int signum, siginfo_t *info, void *context)
 {
-	static pid_t	c_pid = 0;
+	static pid_t	client_pid = 0;
 	static int		bit_count = 0;
 	static char		c = 0;
 
 	(void)(context);
-	if (c_pid != info->si_pid && info->si_pid != 0)
-		c_pid = info->si_pid;
+	if (client_pid != info->si_pid && info->si_pid != 0)
+		client_pid = info->si_pid;
 	else
 	{
 		c |= (signum == SIGUSR2);
@@ -29,7 +29,7 @@ static void	sig_action(int signum, siginfo_t *info, void *context)
 			bit_count = 0;
 			if (!c)
 			{
-				kill(c_pid, SIGUSR2);
+				kill(client_pid, SIGUSR2);
 				return ;
 			}
 			ft_putchar_fd(c, 1);
@@ -38,7 +38,7 @@ static void	sig_action(int signum, siginfo_t *info, void *context)
 		else
 			c <<= 1;
 	}
-	kill(c_pid, SIGUSR1);
+	kill(client_pid, SIGUSR1);
 }
 
 int	main(void)
