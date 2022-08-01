@@ -6,7 +6,7 @@
 /*   By: maliew <maliew@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 21:09:57 by maliew            #+#    #+#             */
-/*   Updated: 2022/07/30 22:19:20 by maliew           ###   ########.fr       */
+/*   Updated: 2022/08/01 22:52:09 by maliew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ char	*g_msg;
 static void	mt_exit(char *str)
 {
 	ft_printf(str);
-	if (g_msg)
-		free(g_msg);
 	exit(0);
 }
 
@@ -59,7 +57,7 @@ int	main(int argc, char **argv)
 	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
-	g_msg = ft_strdup(argv[2]);
+	g_msg = argv[2];
 	if (kill(ft_atoi(argv[1]), SIGUSR1) == -1)
 		mt_exit("Connection error.\n");
 	while (1)
